@@ -74,7 +74,7 @@ const ProductsPage: React.FC = () => {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10 mx-6">
           <select
             className="px-4 py-2 bg-white dark:bg-zinc-700 text-zinc-700 dark:text-orange-300 outline-0 rounded-xl"
             value={category}

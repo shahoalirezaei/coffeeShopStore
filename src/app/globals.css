@@ -39,6 +39,8 @@
   --spacing-30: 7.5rem;
   --spacing-50: 12.5rem;
 
+
+
   /* container */
   --container-padding: 1rem;
   --container-padding-lg: 0.625rem;
@@ -103,8 +105,23 @@ body {
   }
 }
 
+.container {
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
 /* === Components Layer === */
 @layer components {
+  .container {
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+@media (min-width: 1024px){
+  .container {
+    padding-left: var(--container-padding-lg);
+    padding-right: var(--container-padding-lg);
+  }
+}
   .overlay {
     @apply bg-blend-overlay invisible opacity-0 fixed md:hidden inset-0 bg-black/40 z-10 transition-all duration-300;
   }
