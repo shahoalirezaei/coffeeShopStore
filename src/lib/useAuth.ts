@@ -19,9 +19,17 @@ export function useAuth() {
     try {
       const res = await api.get<{ user: User }>("auth/me");
       dispatch(setUser(res.data.user));
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const message =
+        err &&
+          typeof err === "object" &&
+          "response" in err &&
+          (err as any).response?.data?.message
+          ? (err as any).response.data.message
+          : "خطا در دریافت اطلاعات کاربر";
+
       dispatch(setUser(null));
-      setError(err?.response?.data?.message || "خطا در دریافت اطلاعات کاربر");
+      setError(message);
     } finally {
       setIsLoading(false);
     }
