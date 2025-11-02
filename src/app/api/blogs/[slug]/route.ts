@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import BlogModel from "@/models/Blog";
 import { dbConnect } from "@/lib/mongodb";
 
-export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(req: Request, context: { params: Promise<{ slug: string }> }) {
     try {
         await dbConnect();
 
-        const { slug } = params;
+        const { slug } = await context.params;
 
         const blog = await BlogModel.findOne({ slug })
         if (!blog) {
@@ -18,12 +18,13 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
 
         return NextResponse.json(blog, { status: 200 });
 
-    } catch (error) {
-        
-        console.log("❌ GET /api/blogs/[slug] error:", error);
-        return NextResponse.json(
-            { error: "خطا در دریافت مقاله" },
-            { status: 500 }
-        );
+    } catch (err: unknown) {
+        const message =
+            err && typeof err === "object" && "message" in err
+                ? (err as { message: string }).message
+                : "خطا در دریافت اطلاعات";
+
+        return NextResponse.json({ error: message }, { status: 500 });
+
     }
 }

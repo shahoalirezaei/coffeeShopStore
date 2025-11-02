@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 import { UserPlus } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/axios";
-import { User } from "@/types";
-import { body } from "framer-motion/client";
 import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
@@ -30,38 +28,42 @@ export default function RegisterPage() {
   };
 
   const handleRegister = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!validate()) {
-    toast.error("لطفاً اطلاعات را به درستی وارد کنید!");
-    return;
-  }
-
-  try {
-    const res = await api.post('/auth/register', {
-      name,
-      email,
-      password,
-    })
-
-    const data = res.data
-
-    if (res.status !== 201) {
-      toast.error(data.error || "خطا در ثبت‌نام!");
+    if (!validate()) {
+      toast.error("لطفاً اطلاعات را به درستی وارد کنید!");
       return;
     }
 
-    toast.success(data.message || "ثبت‌نام با موفقیت انجام شد!");
-    setName("");
-    setEmail("");
-    setPassword("");
-    router.push('/login')
+    try {
+      const res = await api.post('/auth/register', {
+        name,
+        email,
+        password,
+      })
 
-  } catch (error: any) {
-    toast.error("خطایی در برقراری ارتباط با سرور رخ داد!");
-    console.error(error);
-  }
-};
+      const data = res.data
+
+      if (res.status !== 201) {
+        toast.error(data.error || "خطا در ثبت‌نام!");
+        return;
+      }
+
+      toast.success(data.message || "ثبت‌نام با موفقیت انجام شد!");
+      setName("");
+      setEmail("");
+      setPassword("");
+      router.push('/login')
+
+    } catch (err: unknown) {
+      const message =
+        err && typeof err === "object" && "message" in err
+          ? (err as { message: string }).message
+          : "خطا در دریافت اطلاعات";
+
+      toast.error(message); // نمایش خطا
+    }
+  };
 
 
   return (
@@ -96,11 +98,10 @@ export default function RegisterPage() {
               placeholder="نام و نام خانوادگی"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.name
+              className={`w-full px-4 py-3 rounded-xl border ${errors.name
                   ? "border-red-500"
                   : "border-zinc-300 dark:border-zinc-700"
-              } bg-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 transition`}
+                } bg-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 transition`}
             />
             {errors.name && (
               <span className="text-red-500 text-xs mt-1">{errors.name}</span>
@@ -116,11 +117,10 @@ export default function RegisterPage() {
               placeholder="ایمیل خود را وارد کنید"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.email
+              className={`w-full px-4 py-3 rounded-xl border ${errors.email
                   ? "border-red-500"
                   : "border-zinc-300 dark:border-zinc-700"
-              } bg-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 transition`}
+                } bg-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 transition`}
             />
             {errors.email && (
               <span className="text-red-500 text-xs mt-1">{errors.email}</span>
@@ -136,11 +136,10 @@ export default function RegisterPage() {
               placeholder="رمز عبور"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.password
+              className={`w-full px-4 py-3 rounded-xl border ${errors.password
                   ? "border-red-500"
                   : "border-zinc-300 dark:border-zinc-700"
-              } bg-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 transition`}
+                } bg-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 transition`}
             />
             {errors.password && (
               <span className="text-red-500 text-xs mt-1">

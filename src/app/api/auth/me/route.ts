@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/auth";
 import { dbConnect } from "@/lib/mongodb";
-import UserModel from "@/models/User"; 
+import UserModel from "@/models/User";
+import { User } from "@/types";
 
 export async function GET() {
   try {
@@ -15,9 +16,9 @@ export async function GET() {
       return NextResponse.json({ user: null }, { status: 401 });
     }
 
-    let decoded: any;
+    let decoded: User;
     try {
-      decoded = verifyToken(token);
+      decoded = verifyToken(token) as User;
     } catch {
       return NextResponse.json({ user: null }, { status: 403 });
     }
@@ -35,11 +36,15 @@ export async function GET() {
 
     // موفقیت‌آمیز
     return NextResponse.json({ user }, { status: 200 });
-  } catch (error: any) {
-    console.error("GET /api/user error:", error);
-    return NextResponse.json(
-      { error: "خطا در بررسی کاربر یا اتصال به دیتابیس", user: null },
-      { status: 500 }
-    );
+  } catch (err: unknown) {
+    const message =
+      err && typeof err === "object" && "message" in err
+        ? (err as { message: string }).message
+        : "خطا در دریافت اطلاعات";
+
+    // برای API route
+    return NextResponse.json({ error: message }, { status: 500 });
+
+    // یا برای useAuth
   }
 }

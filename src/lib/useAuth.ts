@@ -20,16 +20,13 @@ export function useAuth() {
       const res = await api.get<{ user: User }>("auth/me");
       dispatch(setUser(res.data.user));
     } catch (err: unknown) {
-      const message =
-        err &&
-          typeof err === "object" &&
-          "response" in err &&
-          (err as any).response?.data?.message
-          ? (err as any).response.data.message
-          : "خطا در دریافت اطلاعات کاربر";
+    const message =
+      err && typeof err === "object" && "message" in err
+        ? (err as { message: string }).message
+        : "خطا در دریافت اطلاعات";
 
-      dispatch(setUser(null));
-      setError(message);
+    setError(message)
+  
     } finally {
       setIsLoading(false);
     }
@@ -47,10 +44,9 @@ export function useAuth() {
     try {
       await api.post("auth/logout");
     } catch {
-      // حتی اگه API ارور داد، سمت کلاینت کاربر رو حذف می‌کنیم
+      
     } finally {
       dispatch(logout());
-      // 🔁 فورس رفرش رابط کاربری (در صورت نیاز)
       window.location.reload();
     }
   }, [dispatch]);

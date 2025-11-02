@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { useAuth } from "@/lib/useAuth";
 import { logout } from "@/store/authSlice";
@@ -11,6 +11,7 @@ import { toast } from "react-hot-toast";
 import api from "@/lib/axios";
 import { PowerOff, UserRound } from "lucide-react";
 import { JalaliDate } from "../shared";
+import Image from "next/image";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -21,7 +22,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const pathname = usePathname();
   const { user } = useAuth();
-  const router = useRouter();
+
   const dispath = useAppDispatch();
 
   const handleLogout = async () => {
@@ -65,9 +66,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 w-64 pt-3 px-4 min-h-screen max-h-screen overflow-y-auto bg-white dark:bg-zinc-800 z-30 transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 w-64 pt-3 px-4 min-h-screen max-h-screen overflow-y-auto bg-white dark:bg-zinc-800 z-30 transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         {/* -------------------------
             Top area:
@@ -79,10 +79,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 flex-shrink-0">
-                  {/* از <img> استفاده کردم تا مسیر داینامیک به سادگی کار کنه */}
-                  <img
+                  <Image
                     src={user.avatar ?? "/images/about/profile-team.jpg"}
                     alt={user.name ?? "آواتار"}
+                    width={48}   // برابر با w-12
+                    height={48}  // برابر با h-12
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -145,7 +146,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </Link>
             </div>
 
-            
+
           </div>
         )}
 
@@ -154,11 +155,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           {navLinks.map((link) => (
             <li key={link.href}>
               <div
-                className={`flex justify-between items-center pr-2 pl-2 py-2 rounded-md transition-colors ${
-                  pathname === link.href
+                className={`flex justify-between items-center pr-2 pl-2 py-2 rounded-md transition-colors ${pathname === link.href
                     ? "bg-orange-200/20 text-orange-200"
                     : "hover:bg-orange-50 dark:hover:bg-zinc-700"
-                }`}
+                  }`}
               >
                 <Link
                   href={link.href}
@@ -231,7 +231,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             </svg>
             سبد خرید
           </Link>
-          
+
         </div>
       </div>
     </>

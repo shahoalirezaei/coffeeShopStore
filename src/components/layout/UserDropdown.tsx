@@ -10,6 +10,7 @@ import { useAuth } from "@/lib/useAuth";
 import { logout } from "@/store/authSlice";
 import api from "@/lib/axios";
 import { toast } from "react-hot-toast";
+import Image from "next/image";
 
 export default function UserDropdown() {
   const dispatch = useAppDispatch();
@@ -35,9 +36,14 @@ export default function UserDropdown() {
       <div className="w-[280px] bg-gray-100 dark:bg-zinc-800 rounded-lg shadow-lg p-4 text-zinc-300">
         {/* User info */}
         <div className="flex items-center gap-3 mb-3 border-b border-b-gray-400 border-gray-100 dark:border-white/5 pb-3">
-          <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 flex-shrink-0">
-            {/* اگر avatar داری، از آن استفاده کن */}
-            <img src={user?.avatar || "/images/about/profile-team.jpg"}  alt= "" className="w-full h-full object-cover" />
+           <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 flex-shrink-0">
+            <Image
+              src={user?.avatar || "/images/about/profile-team.jpg"}
+              alt={user?.name ?? "کاربر مهمان"}
+              width={48}  // برابر با w-12
+              height={48} // برابر با h-12
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex-1">
             <div className="font-DanaBold truncate text-zinc-800 dark:text-white">{user?.name ?? "کاربر مهمان"}</div>

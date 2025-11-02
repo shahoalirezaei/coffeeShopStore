@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ProductBoxProps } from "@/types";
 import CartButton from "./CartButton";
 import CompareButton from "./CompareButton";
+import Image from "next/image";
 
 const ProductBox: React.FC<ProductBoxProps> = ({
   _id,
@@ -34,42 +35,49 @@ const ProductBox: React.FC<ProductBoxProps> = ({
       // href={`/products/${_id}`}
       className="relative product-box bg-white dark:bg-zinc-700 text-zinc-700 dark:text-gray-300 shadow-custom rounded-2xl flex flex-col h-[380px] md:h-[420px] p-3 md:p-5 hover:scale-[1.02] transition-transform duration-300"
     >
-      
-      
-        {/* عکس محصول */}
-        <Link
+
+
+      {/* عکس محصول */}
+      <Link
         href={`/products/${_id}`}
-         className="flex justify-center h-[55%] md:h-[60%]">
-          <img src={image} alt={title} className="w-auto h-full object-contain" />
-        </Link>
+        className="flex justify-center h-[55%] md:h-[60%] relative w-full"
+      >
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-contain"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      </Link>
 
-        {/* اطلاعات محصول */}
-        <div className="flex flex-col flex-1 mt-2">
-          <h5 className="text-zinc-700 dark:text-white/90 text-sm sm:text-base sm:font-black font-DanaBold line-clamp-2">
-            {title}
-          </h5>
+      {/* اطلاعات محصول */}
+      <div className="flex flex-col flex-1 mt-2">
+        <h5 className="text-zinc-700 dark:text-white/90 text-sm sm:text-base sm:font-black font-DanaBold line-clamp-2">
+          {title}
+        </h5>
 
-          <div className="flex items-baseline mt-1.5 md:mt-2.5 gap-x-2 md:gap-x-2.5">
-            {!available ? (
-              <span className="font-DanaBold text-xs md:text-base text-red-500">
-                فعلاً موجود نیست
-              </span>
-            ) : (
-              <>
-                <div className="font-DanaBold text-sm sm:text-base text-teal-600 dark:text-emerald-500">
-                  {price?.toLocaleString("fa-IR")}
-                  <span className="font-Dana text-xs sm:text-sm ml-1">تومان</span>
-                </div>
-                {discount !== 0 && oldPrice && (
-                  <span className="text-gray-600 text-xs sm:font-bold tracking-normal line-through">
-                    {oldPrice.toLocaleString("fa-IR")} تومان
-                  </span>
-                )}
-              </>
-            )}
-          </div>
+        <div className="flex items-baseline mt-1.5 md:mt-2.5 gap-x-2 md:gap-x-2.5">
+          {!available ? (
+            <span className="font-DanaBold text-xs md:text-base text-red-500">
+              فعلاً موجود نیست
+            </span>
+          ) : (
+            <>
+              <div className="font-DanaBold text-sm sm:text-base text-teal-600 dark:text-emerald-500">
+                {price?.toLocaleString("fa-IR")}
+                <span className="font-Dana text-xs sm:text-sm ml-1">تومان</span>
+              </div>
+              {discount !== 0 && oldPrice && (
+                <span className="text-gray-600 text-xs sm:font-bold tracking-normal line-through">
+                  {oldPrice.toLocaleString("fa-IR")} تومان
+                </span>
+              )}
+            </>
+          )}
         </div>
-      
+      </div>
+
       {/* Footer */}
       <div className="flex items-center justify-between w-full mt-auto">
         <div className="flex items-center md:gap-x-3">

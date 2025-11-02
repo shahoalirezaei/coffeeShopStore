@@ -2,11 +2,10 @@
 import { BlogDetailPageClient } from "@/components";
 
 interface BlogDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export default function BlogDetailPage({ params }: BlogDetailPageProps) {
-  const { slug } = params;
-
+export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+  const { slug } = await params;
   return <BlogDetailPageClient slug={slug} />
 }

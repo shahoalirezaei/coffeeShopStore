@@ -22,34 +22,34 @@ export default function LoginPage() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!validate()) {
+    toast.error("لطفاً فرم را به درستی پر کنید!");
+    return;
+  }
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) {
-      toast.error("لطفاً فرم را به درستی پر کنید!");
-      return;
+  try {
+    const res = await api.post("/auth/login", { email, password });
+
+    if (res.data.success) {
+      toast.success(res.data.message || "ورود با موفقیت انجام شد!");
+      setEmail("");
+      setPassword("");
+      router.push("/");
+    } else {
+      toast.error(res.data.error || "خطایی در هنگام ورود رخ داد");
     }
+  } catch (err: unknown) {
+    const message =
+      err && typeof err === "object" && "message" in err
+        ? (err as { message: string }).message
+        : "خطا در دریافت اطلاعات";
 
-    try {
-      const res = await api.post("/auth/login", { email, password });
+    toast.error(message); // نمایش خطا
+  }
+};
 
-      if (res.data.success) {
-        toast.success(res.data.message || "ورود با موفقیت انجام شد!");
-        setEmail("");
-        setPassword("");
-        router.push("/");
-      } else {
-        toast.error(res.data.error || "خطایی در هنگام ورود رخ داد");
-      }
-    } catch (err: any) {
-      // اگر سرور پیام خطا ارسال کرد (مثل 404 یا 401)
-      if (err.response?.data?.error) {
-        toast.error(err.response.data.error);
-      } else {
-        toast.error("خطایی در برقراری ارتباط با سرور رخ داد!");
-      }
-    }
-  };
 
   return (
     <section className="min-h-screen py-20 px-4 md:w-[350px] text-zinc-800 dark:text-gray-200 flex items-center justify-center">

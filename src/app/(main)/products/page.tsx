@@ -7,11 +7,6 @@ import api from "@/lib/axios";
 import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
 
-const containerVariants: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
-
 const ProductsPage: React.FC = () => {
   const [products, setProducts] = useState<ProductBoxProps[]>([]);
   const [loading, setLoading] = useState(true);

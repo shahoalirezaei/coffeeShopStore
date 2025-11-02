@@ -1,17 +1,11 @@
-import type { Metadata } from "next";
 import "@/app/globals.css";
 import { Toaster } from "react-hot-toast";
 import { IconsSprite } from "@/components/shared";
 import { Providers, ReduxProvider, UIOverlayClient } from "@/components";
 
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Coffee Shop",
   description: "Next.js 15 + Tailwind v4 + TypeScript | فروشگاه قهوه آنلاین",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ECE0D1" },
-    { media: "(prefers-color-scheme: dark)", color: "#111827" },
-  ],
   icons: {
     icon: [
       { url: "/app-logo.png", type: "image/png", sizes: "32x32" },
@@ -30,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/svg" sizes="32x32" href="/app-logo.svg" />
         <link rel="icon" type="image/svg" sizes="16x16" href="/app-logo.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/app-logo.svg" />
+        {/* Theme colors */}
         <meta name="theme-color" content="#ECE0D1" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
       </head>
@@ -38,9 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ReduxProvider>
             <UIOverlayClient />
             <IconsSprite />
-            
             {children}
-            
           </ReduxProvider>
         </Providers>
         <Toaster position="top-left" reverseOrder={false} />

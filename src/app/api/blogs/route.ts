@@ -4,14 +4,19 @@ import { dbConnect } from "@/lib/mongodb";
 import BlogModel from "@/models/Blog";
 
 // GET: دریافت همه مقالات
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     await dbConnect();
     const blogs = await BlogModel.find().sort({ createdAt: -1 }); // آخرین‌ها اول
     return NextResponse.json(blogs, { status: 200 });
-  } catch (error) {
-    console.error("GET /api/blogs error:", error);
-    return NextResponse.json({ error: "خطا در دریافت مقالات" }, { status: 500 });
+  } catch (err: unknown) {
+    const message =
+      err && typeof err === "object" && "message" in err
+        ? (err as { message: string }).message
+        : "خطا در دریافت اطلاعات";
+
+    return NextResponse.json({ error: message }, { status: 500 });
+
   }
 }
 
@@ -38,12 +43,13 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(newBlog, { status: 201 });
-  } catch (error: any) {
-    console.error("POST /api/blogs error:", error);
-    // بررسی خطای duplicate key (slug یکتا)
-    if (error.code === 11000) {
-      return NextResponse.json({ error: "این slug قبلاً ثبت شده است" }, { status: 409 });
-    }
-    return NextResponse.json({ error: "خطا در ایجاد مقاله" }, { status: 500 });
+  } catch (err: unknown) {
+    const message =
+      err && typeof err === "object" && "message" in err
+        ? (err as { message: string }).message
+        : "خطا در دریافت اطلاعات";
+
+    return NextResponse.json({ error: message }, { status: 500 });
+
   }
 }
