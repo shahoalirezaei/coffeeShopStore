@@ -53,17 +53,17 @@ export default function UserDropdown() {
 
         {/* Links */}
         <div className="flex flex-col gap-1 text-zinc-600 dark:text-gray-200">
-          <Link href="/dashboard" onClick={() => dispatch(closeUserDropdown())} className="px-3 py-2 rounded-md hover:bg-orange-300 hover:text-white transition text-sm flex items-center gap-2">
-            <svg className="w-5 h-5"><use href='/my-acount' /></svg>
+          <Link href='/my-account' onClick={() => dispatch(closeUserDropdown())} className="px-3 py-2 rounded-md hover:bg-orange-300 hover:text-white transition text-sm flex items-center gap-2">
+            <svg className="w-5 h-5"><use href="#home" /></svg>
             پیشخوان
           </Link>
 
-          <Link href='/my-acount' onClick={() => dispatch(closeUserDropdown())} className="px-3 py-2 rounded-md hover:bg-orange-300 hover:text-white transition text-sm flex items-center gap-2">
+          <Link href='/my-account' onClick={() => dispatch(closeUserDropdown())} className="px-3 py-2 rounded-md hover:bg-orange-300 hover:text-white transition text-sm flex items-center gap-2">
             <UserRound className="w-5 h-5" />
             جزئیات حساب
           </Link>
 
-          <Link href='/my-acount' onClick={() => dispatch(closeUserDropdown())} className="px-3 py-2 rounded-md hover:bg-orange-300 hover:text-white transition text-sm flex items-center gap-2">
+          <Link href='/my-account' onClick={() => dispatch(closeUserDropdown())} className="px-3 py-2 rounded-md hover:bg-orange-300 hover:text-white transition text-sm flex items-center gap-2">
             <svg className="w-5 h-5"><use href="#briefcase" /></svg>
             سفارشات من
           </Link>
