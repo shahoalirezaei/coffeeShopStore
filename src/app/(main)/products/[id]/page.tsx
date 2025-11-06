@@ -31,16 +31,13 @@ export default function ProductDetailPage() {
         setActiveImage(res.data.image)
         // console.log(res.data);
 
-
       } catch {
-
+        console.log("مشکلی پیش آمده محصول پیدا نشد");
+        
 
       }
     }
     if (id) fetchProduct()
-
-    // setProduct(mockProduct);
-    // setActiveImage(mockProduct.image);
   }, [id]);
 
   if (!product) return <p className="text-center h-screen w-full  bg-gray-400 text-black text-2xl flex items-center justify-center">در حال بارگذاری...</p>;

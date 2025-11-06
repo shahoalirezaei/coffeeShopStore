@@ -7,7 +7,7 @@ const HASHED_PASSWORD = bcrypt.hashSync(TEST_PASSWORD, 10);
 
 export const users: User[] = [
     {
-        id: 101,
+        _id: 101,
         name: "علی محمدی",
         email: "ali.mohammadi@example.com",
         password: HASHED_PASSWORD, 
@@ -16,7 +16,7 @@ export const users: User[] = [
         avatar: "/images/about/profile-team.jpg"
     },
     {
-        id: 200,
+        _id: 200,
         name: "سارا حسینی",
         email: "sara.admin@example.com",
        
@@ -26,7 +26,7 @@ export const users: User[] = [
         avatar: "/images/about/profile-team.jpg"
     },
     {
-        id: 102,
+        _id: 102,
         name: "رضا کریمی",
         email: "reza.karimi@example.com",
        
@@ -36,7 +36,7 @@ export const users: User[] = [
         avatar: "/images/about/profile-team.jpg"
     },
     {
-        id: 103,
+        _id: 103,
         name: "مریم احمدی",
         email: "maryam@example.com",
         password: HASHED_PASSWORD, 
@@ -45,7 +45,7 @@ export const users: User[] = [
         avatar: "/images/about/profile-team.jpg"
     },
     {
-        id: 104,
+        _id: 104,
         name: "امیر صالحی",
         email: "amir@example.com",
         password: HASHED_PASSWORD, 

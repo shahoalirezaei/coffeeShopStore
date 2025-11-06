@@ -8,10 +8,13 @@ export default function JalaliDate() {
   const month = m.format("MMMM");
   const year = m.format("YYYY");
 
-  return (
-    <>
-      {`${weekday} ${day} ${month} ${year}`}
-    </>
-    
-  );
+  // تبدیل عددهای انگلیسی به فارسی
+  const toPersianDigits = (str: string) =>
+    str.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+
+  const result = `${weekday} ${day} ${month} ${year}`
+
+  return <>{toPersianDigits(result)}</>
 }
+
+// تبدیل عددهای انگلیسی به فارسی

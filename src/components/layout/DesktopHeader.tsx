@@ -168,32 +168,3 @@ export default function DesktopHeader() {
   );
 }
 
-
-
-// function CartBoxTrigger() {
-//   const [open, setOpen] = React.useState(false);
-//   const items = useAppSelector((s) => s.cart.items);
-//   const itemCount = items.reduce((sum, it) => sum + it.quantity, 0);
-
-//   return (
-//     <div className="relative">
-//       <button
-//         onClick={() => setOpen((s) => !s)}
-//         className="py-3 relative cursor-pointer"
-//       >
-//         <svg className="w-8 h-8 text-orange-200 hover:text-orange-300 transition">
-//           <use href="#shopping-cart" />
-//         </svg>
-
-//         {/* نشانگر تعداد */}
-//         {itemCount > 0 && (
-//           <span className="absolute -top-1.5 -right-1.5 bg-orange-400 text-white text-xs font-DanaBold rounded-full w-5 h-5 flex items-center justify-center">
-//             {itemCount > 9 ? "9+" : itemCount}
-//           </span>
-//         )}
-//       </button>
-
-//       <CartBox isOpen={open} onClose={() => setOpen(false)} />
-//     </div>
-//   );
-// }

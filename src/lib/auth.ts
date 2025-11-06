@@ -1,15 +1,29 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const SECRET = process.env.JWT_SECRET as string;
 
-export function signToken(payload: object){
+
+interface DecodedUser extends JwtPayload{
+    id: string;
+    name?: string;
+    email?: string;
+    role?: string;
+}
+
+export function signToken(payload: { id: string; name?: string; email?: string; role?: string }){
     return jwt.sign(payload, SECRET, { expiresIn: '7d' })
 }
 
-export function verifyToken(token: string){
+export function verifyToken(token: string): DecodedUser | null{
     try{
 
-        return jwt.verify(token, SECRET)
+        const decoded =  jwt.verify(token, SECRET)
+        if(typeof decoded === "string") return null;
+
+        // اطمینان از وجود id در decoded
+        if (!decoded.id) return null;
+
+        return decoded as DecodedUser;
     }catch {
         return null
     }

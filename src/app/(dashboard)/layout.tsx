@@ -1,19 +1,17 @@
-import React from "react"
+// DashboardLayout.tsx
+"use client";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import { useAuth } from '@/lib/useAuth';
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
+
+function DashboardLayout({ children }: { children: React.ReactNode }) {
+
   return (
-    <section className="h-screen flex">
-      {/* اینجا بعداً می‌تونی سایدبار داشبورد بذاری */}
-      <aside className="w-64 bg-gray-100 hidden md:inline-block p-4 h-screen">
-        <h2 className="text-lg text-black pt-5  font-bold">Dashboard Menu</h2>
-        {/* بعداً لینک‌ها رو اینجا اضافه می‌کنی */}
-      </aside>
-
-      <main className="flex-1 p-6 bg-white">{children}</main>
-    </section>
-  )
+    <div className="min-h-screen bg-[#F0F0F0] dark:text-gray-100 dark:bg-dark-mode">
+      {children}
+    </div>
+  );
 }
+
+export default DashboardLayout;

@@ -32,7 +32,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const token = signToken({ id: user._id, email: user.email });
+    const token = signToken({ id: user._id.toString(), email: user.email });
 
     const res = NextResponse.json(
       {

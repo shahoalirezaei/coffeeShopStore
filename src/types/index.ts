@@ -37,7 +37,7 @@ export interface ProductCategoryBoxProps {
 }
 
 export interface User {
-  id: string | number;
+  _id: string | number;
   name: string;
   email: string;
   password: string;
@@ -45,4 +45,28 @@ export interface User {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   avatar?: string;
+}
+
+export interface Order {
+  _id: string;
+  status: "pending" | "delivered" | "returned" | "canceled";
+  date: string; // ISO date string
+  totalAmount: number;
+  items: {
+    productId: string;
+    title: string;
+    quantity: number;
+    price: number;
+    image: string;
+  }[];
+}
+
+export interface Address {
+  id: string;
+  title?: string;
+  city: string;
+  postalCode: string;
+  receiver: string;
+  phone: string;
+  isDefault?: boolean;
 }

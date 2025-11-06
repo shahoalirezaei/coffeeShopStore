@@ -9,28 +9,33 @@ import { ProductBox } from "../shared";
 import { ProductBoxProps } from "@/types";
 import api from "@/lib/axios";
 
+// Skeleton Component
+const ProductSkeleton = () => (
+  <div className="animate-pulse bg-gray-200 dark:bg-zinc-800 rounded-lg h-[250px] w-full flex flex-col justify-between p-4">
+    <div className="bg-gray-300 dark:bg-zinc-700 rounded-md h-32 w-full mb-3"></div>
+    <div className="h-4 bg-gray-300 dark:bg-zinc-700 rounded w-3/4 mb-2"></div>
+    <div className="h-4 bg-gray-300 dark:bg-zinc-700 rounded w-1/2"></div>
+  </div>
+);
+
 export default function MostSelling() {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
-  const [products, setProducts] = useState<ProductBoxProps[]>([])
-  const [loading , setLoading] = useState(true)
+  const [products, setProducts] = useState<ProductBoxProps[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get("/products")
-      .then(res => setProducts(res.data))
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false))
-      
-  },[])
-
-   if (loading) return <p className="text-center py-10">در حال بارگذاری...</p>;
-
-
-  
+    api
+      .get("/products")
+      .then((res) => setProducts(res.data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <section className="most-selling mb-9 md:mb-20">
       <div className="container mx-auto">
+        {/* Header */}
         <div className="flex justify-between items-end tracking-tight mb-5 md:mb-12 lg:mb-14">
           <div className="flex flex-col gap-y-1">
             <h2 className="section-title">پرفروش‌ترین محصولات</h2>
@@ -51,6 +56,7 @@ export default function MostSelling() {
           </div>
         </div>
 
+        {/* Swiper */}
         <Swiper
           modules={[Navigation]}
           slidesPerView={1.2}
@@ -72,11 +78,26 @@ export default function MostSelling() {
           }}
           className="pb-4"
         >
-          {products.map((product) => (
-            <SwiperSlide key={product._id}>
-              <ProductBox {...product} />
-            </SwiperSlide>
-          ))}
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => (
+              <SwiperSlide key={i}>
+                <ProductSkeleton />
+              </SwiperSlide>
+            ))
+            : products.length === 0 ? (
+              <SwiperSlide>
+                <p className="text-center py-10 text-zinc-600 dark:text-gray-400 w-full">
+                  هیچ محصولی برای نمایش وجود ندارد.
+                </p>
+              </SwiperSlide>
+            ) : (
+              products.map((product) => (
+                <SwiperSlide key={product._id}>
+                  <ProductBox {...product} />
+                </SwiperSlide>
+              ))
+            )}
+
         </Swiper>
       </div>
     </section>
