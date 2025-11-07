@@ -9,7 +9,7 @@ export default async function ProductsPage() {
 let products: ProductBoxProps[] = [];
 
   try {
-    const { data } = await api.get<ProductBoxProps[]>("/api/products");
+    const { data } = await api.get<ProductBoxProps[]>("/products");
     products = data;
   } catch (error) {
     console.error("Failed to fetch products:", error);

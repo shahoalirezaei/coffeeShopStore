@@ -8,8 +8,8 @@ export default async function NewProducts() {
   let products: ProductBoxProps[] = [];
 
   try {
-    const { data } = await api.get<ProductBoxProps[]>("/api/products");
-    products = data;
+    const res = await api.get<ProductBoxProps[]>("/products");
+    products = res.data;
   } catch (error) {
     console.error("Failed to fetch products:", error);
     products = []; // fallback به آرایه خالی

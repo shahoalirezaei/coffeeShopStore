@@ -10,7 +10,7 @@ export default async function BlogsSection() {
   let blogs: BlogBoxProps[] = [];
 
   try {
-    const { data } = await api.get<BlogBoxProps[]>("/api/blogs");
+    const { data } = await api.get<BlogBoxProps[]>("/blogs");
     blogs = data;
   } catch (error) {
     console.error("Failed to fetch blogs:", error);
