@@ -1,23 +1,23 @@
-// src/components/home/BlogsSection.tsx
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { BlogBox } from "../shared";
 import { BlogBoxProps } from "@/types";
+import api from "@/lib/axios";
 import Link from "next/link";
 
-export default async function BlogsSection() {
-// از fetch داخلی استفاده کن
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+export default function BlogsSection() {
+  const [blogs, setBlogs] = useState<BlogBoxProps[]>([]);
+  const [loading, setLoading] = useState(true);
 
-let blogs: BlogBoxProps[] = [];
-try {
-  const res = await fetch(`${baseUrl}/api/blogs`);
-  if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-  blogs = await res.json();
-} catch (err) {
-  console.error("Failed to fetch blogs:", err);
-  blogs = [];
-}
+  useEffect(() => {
+    api.get<BlogBoxProps[]>("/blogs")
+      .then(res => setBlogs(res.data))
+      .catch(error => console.error("Axios Error:", error))
+      .finally(() => setLoading(false));
+  }, []);
 
+  if (loading) return <p className="text-center py-10">در حال بارگذاری...</p>;
 
   return (
     <section className="blogs mb-9 md:mb-20">
