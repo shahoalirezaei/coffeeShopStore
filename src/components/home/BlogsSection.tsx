@@ -10,8 +10,8 @@ export default async function BlogsSection() {
   let blogs: BlogBoxProps[] = [];
 
   try {
-    const { data } = await api.get<BlogBoxProps[]>("/blogs");
-    blogs = data;
+    const res = await api.get<BlogBoxProps[]>("/blogs");
+    blogs = res.data;
   } catch (error) {
     console.error("Failed to fetch blogs:", error);
     // می‌توان fallback یا empty array بدهیم
