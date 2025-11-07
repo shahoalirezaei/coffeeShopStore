@@ -5,19 +5,19 @@ import { BlogBoxProps } from "@/types";
 import Link from "next/link";
 
 export default async function BlogsSection() {
- let blogs: BlogBoxProps[] = [];
+// از fetch داخلی استفاده کن
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`, {
-      next: { revalidate: 60 }, // ISR برای کش ۱ دقیقه‌ای
-    });
+let blogs: BlogBoxProps[] = [];
+try {
+  const res = await fetch(`${baseUrl}/api/blogs`);
+  if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  blogs = await res.json();
+} catch (err) {
+  console.error("Failed to fetch blogs:", err);
+  blogs = [];
+}
 
-    if (!res.ok) throw new Error("Failed to fetch blogs");
-
-    blogs = await res.json();
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-  }
 
   return (
     <section className="blogs mb-9 md:mb-20">

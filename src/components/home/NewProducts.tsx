@@ -5,18 +5,19 @@ import { ProductBoxProps } from "@/types";
 
 
 export default async function NewProducts() {
- let products: ProductBoxProps[] = [];
+ // از fetch داخلی استفاده کن
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
-      next: { revalidate: 60 }, // هر ۶۰ ثانیه یکبار کش رفرش شود (ISR)
-    });
+let products: ProductBoxProps[] = [];
+try {
+  const res = await fetch(`${baseUrl}/api/products`);
+  if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  products = await res.json();
+} catch (err) {
+  console.error("Failed to fetch products:", err);
+  products = [];
+}
 
-    if (!res.ok) throw new Error("Failed to fetch products");
-    products = await res.json();
-  } catch (error) {
-    console.error("Error fetching products:", error);
-  }
 
   return (
     <section className="products dark:bg-[url('/images/products-bg.png')] pt-8 md:pt-24 lg:pt-48">
