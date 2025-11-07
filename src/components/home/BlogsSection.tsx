@@ -2,7 +2,6 @@
 import React from "react";
 import { BlogBox } from "../shared";
 import { BlogBoxProps } from "@/types";
-
 import Link from "next/link";
 
 export default async function BlogsSection() {
