@@ -74,14 +74,16 @@ function SidebarDashboard({ active, onChange, user, isOpen }: props) {
                     </div>
                     <div className='flex flex-col justify-center items-center gap-y-2.5 child:text-gray-600 child-hover:text-zinc-800'>
                         <button
+                        className='cursor-pointer'
                             onClick={() => dispatch(openConfirmModal())}
                         >
                             <svg className='w-6 h-6'><use href='#arrow-right-end-on-rectangle'></use></svg>
                         </button>
                         <Link
+                       
                             href="/my-account?tab=profile"
                         >
-                            <button>
+                            <button className='cursor-pointer'>
                                 <svg className='w-6 h-6'><use href='#setting'></use></svg>
                             </button>
                         </Link>
@@ -92,7 +94,7 @@ function SidebarDashboard({ active, onChange, user, isOpen }: props) {
                         <button
                             key={item.key}
                             onClick={() => handleClickItem(item.key)}
-                            className={`w-full py-2.5 px-5 gap-x-3 flex justify-start items-center text-base transition-all duration-300 ${active === item.key ? "bg-orange-300 text-white" : ""
+                            className={`w-full py-2.5 px-5 gap-x-3 flex hover:bg-orange-200  cursor-pointer justify-start items-center text-base transition-all duration-300 ${active === item.key ? "bg-orange-300 text-white" : ""
                                 }`}
                         >
                             {item.icon}
