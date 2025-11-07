@@ -2,20 +2,22 @@
 import React from "react";
 import { BlogBox } from "../shared";
 import { BlogBoxProps } from "@/types";
-import api from "@/lib/axios"; // instance Axios
+
 import Link from "next/link";
 
 export default async function BlogsSection() {
-  
-  let blogs: BlogBoxProps[] = [];
+ let blogs: BlogBoxProps[] = [];
 
   try {
-    const res = await api.get<BlogBoxProps[]>("/blogs");
-    blogs = res.data;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`, {
+      next: { revalidate: 60 }, // ISR برای کش ۱ دقیقه‌ای
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch blogs");
+
+    blogs = await res.json();
   } catch (error) {
-    console.error("Failed to fetch blogs:", error);
-    // می‌توان fallback یا empty array بدهیم
-    blogs = [];
+    console.error("Error fetching blogs:", error);
   }
 
   return (

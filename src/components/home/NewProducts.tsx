@@ -2,17 +2,20 @@
 import Link from "next/link";
 import { ProductBox } from "../shared";
 import { ProductBoxProps } from "@/types";
-import api from "@/lib/axios"; // instance Axios
+
 
 export default async function NewProducts() {
-  let products: ProductBoxProps[] = [];
+ let products: ProductBoxProps[] = [];
 
   try {
-    const res = await api.get<ProductBoxProps[]>("/products");
-    products = res.data;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+      next: { revalidate: 60 }, // هر ۶۰ ثانیه یکبار کش رفرش شود (ISR)
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch products");
+    products = await res.json();
   } catch (error) {
-    console.error("Failed to fetch products:", error);
-    products = []; // fallback به آرایه خالی
+    console.error("Error fetching products:", error);
   }
 
   return (
