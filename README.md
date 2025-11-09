@@ -2,7 +2,7 @@
 
 A modern, RTL-first coffee e-commerce experience built with the Next.js App Router. The project showcases a full-stack flow—from product discovery and blog content to authentication-protected dashboards—optimized for deployment on Vercel.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel)](https://coffee-shop-store.vercel.app)
+[![Live Demo]([https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel)](https://coffee-shop-store.vercel.app](https://coffee-shop-store.vercel.app/))
 
 
 ## Table of Contents
