@@ -47,7 +47,7 @@ Coffee Shop Store delivers a polished, Persian-language storefront with dark mod
 
 - **Framework:** Next.js 15 (App Router, Route Groups, Edge-ready middleware)
 - **Language:** TypeScript (strict mode)
-- **UI:** React 19, Tailwind CSS v4, CSS custom properties, Lucide icons
+- **UI:** React 19, Tailwind CSS v4, CSS custom properties, Lucide icons, Swiper js
 - **State:** Redux Toolkit with typed hooks and persistence
 - **Animations & UX:** Framer Motion, Swiper, react-hot-toast
 - **Backend:** Next.js API routes, Mongoose 8, MongoDB driver 6
@@ -200,7 +200,9 @@ Update this section with relevant UI captures from `public/screenshots`:
 
 - ![Home](public/screenshots/cofee%20(1).png)
 - ![Products](public/screenshots/cofee%20(2).png)
-- ![Dashboard](public/screenshots/Screenshot%20(91).png)
+- ![Mobile](public/screenshots/cofee%20(4).png)
+- ![Dashboard](public/screenshots/cofee%20(5).png)
+- ![Dashboard](public/screenshots/cofee%20(6).png)
 
 > Filenames currently contain spaces. Consider renaming (e.g., `home.png`) for cleaner Markdown links.
 
