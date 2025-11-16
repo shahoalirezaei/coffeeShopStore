@@ -15,7 +15,6 @@ A modern, RTL-first coffee e-commerce experience built with the Next.js App Rout
 - [API Surface](#api-surface)
 - [State & Data Management](#state--data-management)
 - [Styling & UX](#styling--ux)
-- [Environment Variables](#environment-variables)
 - [Getting Started](#getting-started)
 - [Available Scripts](#available-scripts)
 - [Database & Seeding](#database--seeding)
@@ -65,8 +64,6 @@ Coffee Shop Store delivers a polished, Persian-language storefront with dark mod
 ### Data Layer
 - `src/models`: Mongoose schemas for `Product`, `Category`, `Blog`, and `User`.
 - `src/lib`: MongoDB connection helper, JWT utilities, and Axios instance.
-- `src/data`: Seed data (products, categories, blogs, users) used for initial population.
-- `src/scripts`: `seedProducts.ts` scaffold for database seeding.
 
 ### Components
 - `src/components/home`: Sectioned homepage widgets (hero, products, blogs, services, coffee club).
