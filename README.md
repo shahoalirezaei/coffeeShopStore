@@ -139,17 +139,6 @@ Authentication-specific middleware (`middleware.ts`) intercepts `/my-account/*` 
 - Swiper sliders for “Most Selling” carousel; navigation wired through custom refs.
 - Toast notifications for auth flows and form validation feedback.
 
-## Environment Variables
-
-Create `.env.local` with:
-
-```
-MONGODB_URI=mongodb://127.0.0.1:27017/coffeeShop
-JWT_SECRET=replace-with-strong-secret
-```
-
-(Use the production MongoDB connection string and secret when deploying to Vercel.)
-
 ## Getting Started
 
 1. **Clone the repository**
@@ -238,3 +227,16 @@ No license file is currently provided. Add one (e.g., `MIT`) if you intend to op
 - [`lucide-react`](https://lucide.dev/) for iconography.
 - [`jalali-moment`](https://github.com/fingerpich/jalali-moment) for Persian date formatting.
 - [`swiper`](https://swiperjs.com/react) and [`framer-motion`](https://www.framer.com/motion/) for interactive UI elements.
+
+
+-----
+
+## 🙋‍♂️ Author
+
+Created by **Shaho Alirezaei** as a junior frontend showcase project.
+
+## 📬 Contact
+
+For questions or job opportunities, feel free to contact me:
+
+- Email: [shahoalirezaei95@gmail.com](mailto:shahoalirezaei95@gmail.com)
