@@ -9,7 +9,7 @@
 //     await dbConnect();
 //     console.log("✅ Connected to MongoDB");
 
-//     // حذف محصولات قبلی (اختیاری)
+//     // حذف محصولات قبلی 
 //     await ProductModel.deleteMany({});
 //     console.log("🗑️ Cleared existing products");
 
