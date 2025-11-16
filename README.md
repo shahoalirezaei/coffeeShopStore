@@ -144,8 +144,8 @@ Authentication-specific middleware (`middleware.ts`) intercepts `/my-account/*` 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-org/coffee-shop-store.git
-   cd coffee-shop-store
+   git clone https://github.com/shahoalirezaei/coffeeShopStore
+   cd coffeeShopStore
    ```
 
 2. **Install dependencies**
